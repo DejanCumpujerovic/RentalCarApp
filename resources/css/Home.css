@@ -1,0 +1,72 @@
+/* Home.css */
+.home-background {
+    background-image: url('../assets/images/background1.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Puna visina ekrana */
+    width: 198vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #f0f0f0; /* Svetla boja teksta za kontrast */
+    padding: 0 20px; /* Dodatni prostor za marginu kod manjih ekrana */
+    margin: 0; /* Uklanja podrazumevane margine */
+}
+
+.home-title {
+    font-size: 3em; /* Prilagodi veličinu po potrebi */
+    margin: 0.5em 0;
+    color: #ffcc00; /* Zlatna boja */
+}
+
+.home-subtitle {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+    color: #ffcc00; /* Zlatna boja */
+}
+
+.car-list {
+    margin-top: 20px; /* Razmak od gornjeg sadržaja */
+    display: flex;
+    flex-wrap: wrap; /* Omogućava prelazak u novi red ako nema dovoljno prostora */
+    gap: 20px; /* Razmak između kartica */
+    justify-content: center; /* Centriranje kartica u redu */
+    align-items: flex-start; /* Poravnanje kartica po vrhu */
+    width: 100%;
+}
+
+.car-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: calc(25% - 20px);
+    max-width: 300px;
+    min-width: 200px;
+    text-align: center;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: black; /* Dodaj eksplicitnu boju teksta */
+}
+
+.error {
+    color: red;
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+
+.modal-content p {
+    color: black; /* Dodaj eksplicitnu boju teksta */
+}
+
+.user-name {
+    color: red; /* Crvena boja za ime */
+    font-weight: bold; /* Podebljano za isticanje */ 
+    font-size: 1.0em; /* Ista veličina slova kao i za .home-subtitle */ 
+    display: inline; /* Održava elemente u istom redu */
+}
