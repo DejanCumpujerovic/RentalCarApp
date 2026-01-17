@@ -1,66 +1,186 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+🚗 RentalCarApp
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+RentalCarApp je demo aplikacija koja prikazuje integraciju Laravel-a i React-a pomoću Inertia.js frameworka.
+Cilj projekta je demonstracija kako se može izgraditi moderna SPA aplikacija bez potrebe za pisanjem posebnog REST API-ja.
 
-## About Laravel
+📌 Uvod
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Inertia.js eliminiše potrebu za pisanjem REST API-ja i ručnim upravljanjem HTTP zahtevima.
+Umesto toga, koristi postojeće server-side rute i kontrolere za komunikaciju sa front-end-om.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Framework automatski upravlja preuzimanjem podataka i njihovom sinhronizacijom sa React komponentama, što značajno smanjuje vreme potrebno za konfiguraciju.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ova jednostavnost omogućava fokusiranje na razvoj funkcionalnosti, umesto na tehničke detalje povezivanja front-end-a i back-end-a.
 
-## Learning Laravel
+🛠️ Tehnologije
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Laravel – PHP framework za back-end
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+React – JavaScript biblioteka za front-end
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Inertia.js – Most između Laravel-a i React-a (SPA bez API-ja)
 
-## Laravel Sponsors
+MySQL – Baza podataka
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Vite / npm – Front-end build alati
 
-### Premium Partners
+⚙️ Instalacija i pokretanje
+🔹 Preduslovi
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Pre početka, potrebno je imati instalirano:
 
-## Contributing
+XAMPP
+ (Apache + MySQL)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Node.js i npm
 
-## Code of Conduct
+Composer
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Visual Studio Code ili drugi editor
 
-## Security Vulnerabilities
+Provera instalacije Node.js-a:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+node -v
+npm -v
 
-## License
+🔹 Koraci za instalaciju
+1️⃣ Kloniranje repozitorijuma
+git clone https://github.com/DejanCumpujerovic/RentalCarApp.git
+cd RentalCarApp
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2️⃣ Instalacija PHP zavisnosti
+composer install
+
+3️⃣ Instalacija JavaScript zavisnosti
+npm install
+
+4️⃣ Podesite .env fajl
+cp .env.example .env
+
+
+U .env fajlu podesite bazu:
+
+DB_DATABASE=rentalCar
+DB_USERNAME=root
+DB_PASSWORD=
+
+5️⃣ Generisanje aplikacionog ključa
+php artisan key:generate
+
+6️⃣ Pokretanje migracija
+php artisan migrate
+
+7️⃣ Pokretanje servera
+php artisan serve
+npm run dev
+
+
+📍 Aplikacija je dostupna na:
+👉 http://127.0.0.1:8000
+
+✨ Funkcionalnosti
+
+✅ Prijavljivanje korisnika (Login)
+
+🚘 Prikaz svih dostupnih automobila
+
+📅 Filtriranje automobila po datumu
+
+📝 Iznajmljivanje automobila u izabranom periodu
+
+🧩 Laravel
+Šta je Laravel?
+
+Laravel je jedan od najpopularnijih PHP framework-a, poznat po eleganciji, jednostavnosti i bogatoj funkcionalnosti.
+Zasniva se na MVC (Model-View-Controller) arhitekturi, koja razdvaja logiku, podatke i prikaz.
+
+Zašto Laravel?
+Karakteristika	Opis
+Elegancija koda	Čist i čitljiv sintaksni stil
+Eloquent ORM	Jednostavan rad sa bazama
+Blade templating	Dinamički UI
+Artisan CLI	Brz razvoj
+Inertia.js podrška	SPA bez API-ja
+Skalabilnost	Pogodan za male i velike projekte
+Primer koda (Laravel + Inertia)
+public function index()
+{
+    $cars = Car::all();
+
+    return Inertia::render('Home', [
+        'cars' => $cars,
+    ]);
+}
+
+Route::get('/', [CarController::class, 'index'])->name('home');
+Route::post('/filterCars', [CarController::class, 'filterCars']);
+
+⚛️ React
+Šta je React?
+
+React je JavaScript biblioteka razvijena od strane Meta (Facebook) za izgradnju korisničkih interfejsa.
+Koristi komponentni pristup i Virtual DOM, što ga čini brzim i efikasnim.
+
+Zašto React?
+Karakteristika	Opis
+Komponente	Modularan i održiv kod
+Deklarativni stil	Fokus na UI
+Virtual DOM	Brza ažuriranja
+Fleksibilnost	Integracija sa raznim alatima
+Velika zajednica	Mnogo resursa
+
+🔗 Inertia.js
+Šta je Inertia.js?
+
+Inertia.js omogućava kreiranje SPA aplikacija koristeći postojeće server-side rute i kontrolere.
+Deluje kao "lepak" između Laravel-a i React-a – bez potrebe za REST API-jem.
+
+Primer: Sa Inertia.js
+const handleRent = () => {
+    Inertia.post('/rent', {
+        car_id: selectedCar.id,
+        start_date: rentalDates.startDate,
+        end_date: rentalDates.endDate,
+    });
+    closeModal();
+};
+
+Primer: Bez Inertia.js (Fetch API)
+const handleRent = async () => {
+    try {
+        const response = await fetch('/rent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute('content'),
+            },
+            body: JSON.stringify({
+                car_id: selectedCar.id,
+                start_date: rentalDates.startDate,
+                end_date: rentalDates.endDate,
+            }),
+        });
+
+        if (response.ok) {
+            alert("Car rented successfully!");
+            closeModal();
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+};
+
+⚖️ Kada koristiti koji pristup?
+Inertia.js	Fetch API
+Koristite Laravel	Backend nije Laravel
+Brz i jednostavan razvoj	Veća kontrola
+Nema dodatnog API sloja	Ručno upravljanje zahtevima
+
+🏁 Zaključak
+
+Korišćenje Inertia.js značajno smanjuje količinu koda i kompleksnost u Laravel + React aplikacijama.
+Predstavlja moćan most koji ubrzava razvoj i pojednostavljuje održavanje.
+
+Fetch API pruža veću fleksibilnost, ali zahteva više rada i složeniju arhitekturu.
