@@ -2,10 +2,6 @@
 
 > **Laravel + React + Inertia.js** demo aplikacija za iznajmljivanje automobila
 
-📚 **Predmet:** Napredno softversko inženjerstvo
-👤 **Autor:** Dejan Čumpujerović
-🎓 **Broj indeksa:** 1678
-
 ---
 
 ## 📑 Sadržaj
