@@ -14,23 +14,47 @@ class CarController extends Controller
 {
     public function index()
     {
-        // Fetch all cars regardless of status
-        $cars = Car::all();
-    
-        // Pass the cars and auth information to the Home page
+        $cars = Car::withCount('reviews')
+            ->withAvg('reviews', 'rating')
+            ->get()
+            ->map(function ($car) {
+                $arr = $car->toArray();
+                $arr['avg_rating'] = $car->reviews_avg_rating ? round((float) $car->reviews_avg_rating, 1) : null;
+                return $arr;
+            });
+
         return Inertia::render('Home', [
             'cars' => $cars,
-
         ]);
     }
 
     /**
-     * Show details of a specific car.
+     * Show details of a specific car (Inertia page).
      */
-    public function show($id)
+    public function show(Car $car)
     {
-        $car = Car::findOrFail($id); // Find car by ID
-        return response()->json($car);
+        $car->load(['reviews' => fn ($q) => $q->with('user')->latest()]);
+        $car->reviews_count = $car->reviews->count();
+        $car->avg_rating = round($car->reviews->avg('rating'), 1);
+
+        $canReview = false;
+        $userReview = null;
+        if (Auth::check()) {
+            $userReview = $car->reviews()->where('user_id', Auth::id())->first();
+            $today = Carbon::today()->toDateString();
+            $hasCompletedRental = Auth::user()
+                ->rentals()
+                ->where('car_id', $car->id)
+                ->where('end_date', '<', $today)
+                ->exists();
+            $canReview = (bool) $hasCompletedRental;
+        }
+
+        return Inertia::render('CarDetails', [
+            'car' => $car,
+            'canReview' => $canReview,
+            'userReview' => $userReview,
+        ]);
     }
 
     public function rent(Request $request)
@@ -107,20 +131,25 @@ class CarController extends Controller
             $startDate = Carbon::parse($request->input('start_date'));
             $endDate = Carbon::parse($request->input('end_date'));
     
-            Log::info('Parsed dates', ['startDate' => $startDate, 'endDate' => $endDate]);
-    
-            $availableRentals = Rental::where(function ($query) use ($startDate, $endDate) {
-                $query->where('start_date', '>', $endDate)
-                      ->orWhere('end_date', '<', $startDate);
-            })->with('car')->get();
-    
-            Log::info('Filtered available rentals: ', ['availableRentals' => $availableRentals]);
+            // Vozila dostupna u periodu = ona koja NEMAJU nijedan rental koji se preklapa sa tim periodom
+            $availableCars = Car::whereDoesntHave('rentals', function ($query) use ($startDate, $endDate) {
+                $query->where('start_date', '<=', $endDate)
+                      ->where('end_date', '>=', $startDate);
+            })
+                ->withCount('reviews')
+                ->withAvg('reviews', 'rating')
+                ->get()
+                ->map(function ($car) {
+                    $arr = $car->toArray();
+                    $arr['avg_rating'] = $car->reviews_avg_rating ? round((float) $car->reviews_avg_rating, 1) : null;
+                    return $arr;
+                });
     
             return response()->json([
-                'availableRentals' => $availableRentals
+                'cars' => $availableCars
             ]);
         } catch (\Exception $e) {
-            Log::error('Error filtering rentals: ' . $e->getMessage());
+            Log::error('Error filtering cars: ' . $e->getMessage());
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
     }

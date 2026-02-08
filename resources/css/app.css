@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+}
+#app {
+    width: 100%;
+    min-height: 100vh;
+}
+#app > div {
+    min-height: 100vh;
+}

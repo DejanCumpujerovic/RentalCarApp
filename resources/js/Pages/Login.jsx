@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Inertia } from '@inertiajs/inertia';
+import React from 'react';
 import { useForm } from '@inertiajs/inertia-react';
+import { InertiaLink } from '@inertiajs/inertia-react';
 import '../../css/Login.css';
 
 export default function Login() {
@@ -41,6 +41,9 @@ export default function Login() {
                     {processing ? 'Logging in...' : 'Login'}
               </button>
           </form>
+          <p className="auth-switch">
+              Don't have an account? <InertiaLink href="/register">Register</InertiaLink>
+          </p>
       </div>
   );
 }

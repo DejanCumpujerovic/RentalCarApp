@@ -66,3 +66,19 @@ span {
     margin-top: -8px;
     margin-bottom: 10px;
 }
+
+.auth-switch {
+    text-align: center;
+    margin-top: 16px;
+    color: #ecf0f1;
+    font-size: 14px;
+}
+
+.auth-switch a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}

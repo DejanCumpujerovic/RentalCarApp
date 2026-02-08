@@ -22,20 +22,24 @@ class RentalsTableSeeder extends Seeder
 
         $rentals = [];
 
-        foreach ($cars as $car) {
-            // Generate random dates for the rental period
-            $startDate = now()->addDays(rand(-20, -1)); // Past dates
-            $endDate = $startDate->copy()->addDays(rand(1, 7)); // Duration of 1-7 days
+        $seedUser = \App\Models\User::where('email', 'janko@gmail.com')->first();
+        if (!$seedUser) {
+            $this->command->info("User Janko not found. Run UserSeeder first.");
+            return;
+        }
 
-            // Check if the car is already rented
+        $seedRentalUserId = $seedUser->id;
+        foreach ($cars as $car) {
+            // Prošli periodi za neka vozila (da baza ima malo istorije)
+            $startDate = now()->addDays(rand(-20, -1));
+            $endDate = $startDate->copy()->addDays(rand(1, 7));
+
             if ($car->status === 'rented') {
-                // Create a rental record for this car
                 $rentals[] = [
-                    'user_id' => rand(1, 10), // Assume we have user IDs from 1 to 10
+                    'user_id' => $seedRentalUserId,
                     'car_id' => $car->id,
                     'start_date' => $startDate,
                     'end_date' => $endDate,
-                    'total_price' => $car->price_per_day * $startDate->diffInDays($endDate),
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];

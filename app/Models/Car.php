@@ -8,6 +8,8 @@ use Illuminate\Notifications\Notifiable;
 
 class Car extends Authenticatable
 {
+    protected $fillable = ['name', 'brand', 'year', 'registration_no', 'status', 'price_per_day'];
+
     public function currentRenter()
     {
         return $this->belongsTo(User::class, 'current_renter_id');
@@ -16,5 +18,10 @@ class Car extends Authenticatable
     public function rentals()
     {
         return $this->hasMany(Rental::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

@@ -22,8 +22,8 @@ class AuthenticatedSessionController extends Controller
             // Regenerate session to prevent session fixation
             $request->session()->regenerate();
     
-            // Redirect to the intended location or home
-            return redirect()->intended('/');
+            // Redirect to the intended location or home (full page reload to avoid SPA nav bug)
+            return Inertia::location(redirect()->intended('/')->getTargetUrl());
         }
     
         // If authentication fails, return a generic error

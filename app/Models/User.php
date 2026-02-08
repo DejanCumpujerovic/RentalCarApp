@@ -28,6 +28,11 @@ class User extends Authenticatable
         return $this->hasMany(Rental::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 
     protected $hidden = [
         'password',
