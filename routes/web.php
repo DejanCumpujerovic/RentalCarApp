@@ -27,6 +27,8 @@ Route::post('/logout', [\App\Http\Controllers\AuthenticatedSessionController::cl
 
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
+    Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     Route::get('/my-rentals', [RentalController::class, 'myRentals'])->name('my-rentals');
     Route::post('/rent', [RentalController::class, 'store']); // Rent a car
     Route::delete('/rentals/{rental}', [RentalController::class, 'destroy'])->name('rentals.destroy');

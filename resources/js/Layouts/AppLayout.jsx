@@ -23,6 +23,7 @@ export default function AppLayout({ children }) {
                             <InertiaLink href="/my-rentals" className="app-layout-btn app-layout-btn--primary">
                                 My Reservations
                             </InertiaLink>
+                            <InertiaLink href="/profile" className="app-layout-btn">Profile</InertiaLink>
                             <button
                                 type="button"
                                 onClick={handleLogout}
